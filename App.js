@@ -5,6 +5,14 @@ import {
 import { Text, View } from 'react-native';
 import { s } from './app.styles.js';
 import Header from './components/Header/Header.js';
+import CardTodo from './components/CardTodo/CardTodo.js';
+
+const TODO_LIST = [
+  {id: 1, title: "Sortir le chien", isCompleted: true},
+  {id: 2, title: "Aller chez le garagiste", isCompleted: false},
+  {id: 3, title: "Faire les courses", isCompleted: false},
+  {id: 4, title: "Appeler le vétérinaire", isCompleted: false}
+]
 
 export default function App() {
   return (
@@ -15,7 +23,7 @@ export default function App() {
             <Header />
           </View>
           <View style={s.body}>
-            <Text>Body</Text>
+            <CardTodo todo={TODO_LIST[0]} />
           </View>
           <View style={s.footer}>
             <Text>Footer</Text>
