@@ -3,15 +3,19 @@ import { StyleSheet } from 'react-native';
 export const s = StyleSheet.create({
     header: {
         flex: 1,
-        backgroundColor: "red",
+        backgroundColor: "",
     },
     body: {
         flex: 5,
-        backgroundColor: "blue",
+        backgroundColor: "",
     },
     footer: {
-        backgroundColor: "green",
+        backgroundColor: "",
         height: 70
     },
-    app: {backgroundColor: "#f9f9f9", flex: 1}
+    app: {
+        backgroundColor: "#f9f9f9", 
+        flex: 1,
+        padding: 10
+    }
 })
