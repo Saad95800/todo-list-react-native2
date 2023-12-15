@@ -7,16 +7,31 @@ import { Text, View, ScrollView } from 'react-native';
 import { s } from './app.styles.js';
 import Header from './components/Header/Header.js';
 import CardTodo from './components/CardTodo/CardTodo.js';
+import TabBottomMenu from './components/TabBottomMenu/TabBottomMenu.js';
 
 
 export default function App() {
 
-  const [todoList, setTodoList ] = useState([
+  const [selectedTabName, setSelectedTabName ] = useState('all')
+
+    const [todoList, setTodoList ] = useState([
     {id: 1, title: "Sortir le chien", isCompleted: true},
     {id: 2, title: "Aller chez le garagiste", isCompleted: false},
     {id: 3, title: "Faire les courses", isCompleted: false},
     {id: 4, title: "Appeler le vétérinaire", isCompleted: false}
   ])
+
+  function getFilteredList(){
+    switch(selectedTabName){
+      case "all":
+        return todoList
+      case "inProgress":
+        return todoList.filter(todo => !todo.isCompleted)
+      case "done":
+        return todoList.filter(todo => todo.isCompleted)
+    }
+  }
+
 
   function updateTodo(todo){
     const updatedTodo = {
@@ -28,11 +43,10 @@ export default function App() {
     const updatedTodolist = [...todoList]
     updatedTodolist[indexToUpdate] = updatedTodo
     setTodoList(updatedTodolist)
-
   }
 
   function renderTodoList(){
-    return todoList.map((todo, i) => {
+    return getFilteredList().map((todo, i) => {
       return <View key={i} style={s.cardItem}>
                 <CardTodo todo={todo} updateTodo={updateTodo}/>
              </View>
@@ -50,7 +64,7 @@ export default function App() {
             <ScrollView>{renderTodoList()}</ScrollView>
           </View>
           <View style={s.footer}>
-            <Text>Footer</Text>
+            <TabBottomMenu selectedTabName={selectedTabName} setSelectedTabName={setSelectedTabName} todoList={todoList}/>
           </View>
         </SafeAreaView>
       </SafeAreaProvider>
